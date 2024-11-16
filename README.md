@@ -25,9 +25,9 @@ X : [경로 거리, 풍속, 효율 점수]
 y : 배송 시간
 
 ## 3. 사용 라이브러리
-* Scikit-learn: 머신러닝
-* Pandas: 데이터 분석
-* Joblib: 병렬 처리
+* <b>Scikit-learn</b> - 머신러닝
+* <b>Pandas</b> - 데이터 분석
+* <b>Joblib</b> - 병렬 처리
 
 ## 4. 파일 생성 흐름
 
