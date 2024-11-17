@@ -31,12 +31,12 @@ y : 배송 시간
 
 ## 4. 파일 생성 흐름
 
-입력 파일: data/raw_data.csv: 원시 데이터
+입력 파일) data/raw_data.csv: 원시 데이터 (수집 데이터)
 
 python src/data_preprocessing.py
 
-중간 결과: data/processed_data.csv: 전처리된 데이터
+생성 결과물) data/processed_data.csv: 전처리된 데이터 (최종 학습 데이터)
 
 python src/train_model.py
 
-출력 결과: models/delivery_time_prediction_model.pkl: 학습된 모델 파일
+생성 결과물) models/delivery_time_prediction_model.pkl: 학습된 모델
