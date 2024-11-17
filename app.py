@@ -1,7 +1,7 @@
 # app.py
 # Flask를 통해 API를 제공, 예측 요청을 받아 모델을 통해 결과 반환
 from flask import Flask, request, jsonify
-from model_utils import load_model
+from src.model_utils import load_model
 import pandas as pd
 import os
 
