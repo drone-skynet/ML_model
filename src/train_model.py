@@ -1,5 +1,4 @@
 # train_model.py
-# 독립 변수는 대문자 X(행렬), 종속 변수는 소문자 y로 표기하는 것이 ML 관례
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
