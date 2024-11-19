@@ -7,30 +7,14 @@ import joblib
 import math
 import os
 
-# 효율 점수 계산 함수
-def calculate_efficiency_score(drone_direction, wind_direction, wind_speed):
-    # 상대 각도 계산
-    relative_angle = (wind_direction - drone_direction + 360) % 360
-    relative_angle = math.radians(relative_angle)  # 라디안으로 변환
-
-    # 효율 점수 계산
-    efficiency_score = -math.cos(relative_angle) * wind_speed
-    return efficiency_score
-
 # processed_data.csv 데이터를 읽어 모델을 학습하고 평가
 # 학습된 모델을 delivery_time_prediction_model.pkl로 저장하여 flask 서버에서 사용할 수 있도록 준비
 def train_model(data_file, model_file):
     # 데이터 읽기
     data = pd.read_csv(data_file)
 
-    # 효율 점수 계산
-    data['efficiency_score'] = data.apply(
-        lambda row: calculate_efficiency_score(row['drone_direction'], row['wind_direction'], row['wind_speed']),
-        axis=1
-    )
-
     # 입력 피처와 타겟 변수 설정
-    X = data[['distance', 'wind_speed', 'efficiency_score']]  # 입력 피처
+    X = data[['distance', 'efficiency_score']]  # 입력 피처
     y = data['delivery_time']  # 타겟 변수
 
     # 데이터 분할 (학습용 데이터와 테스트 데이터를 8:2 비율로 분할)
