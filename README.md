@@ -40,3 +40,7 @@ python src/data_preprocessing.py
 python src/train_model.py
 
 생성 결과물) models/delivery_time_prediction_model.pkl (학습된 모델)
+
+## (참고) 데이터 시각화
+<img src="https://github.com/user-attachments/assets/cbb50ca9-8681-473d-ad45-1220b838cb52" width="800" height="400"/>
+<img src="https://github.com/user-attachments/assets/e4ca81b5-e36a-4857-80b1-3da6bc478100" width="400" height="400"/>
