@@ -20,7 +20,7 @@ Efficiency Score = -cos(Relative Angle) x Wind Speed
 e.g. 효율 점수가 음수라면 바람이 배송 시간에 방해되는 것
 
 ## 2. 최종 학습 데이터
-X : [경로 거리, 풍속, 효율 점수]
+X : [경로 거리, 효율 점수]
 
 y : 배송 시간
 
