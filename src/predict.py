@@ -26,7 +26,7 @@ def predict_delivery_time(model_file, input_data):
     )
     
     # 예측 수행
-    predictions = model.predict(input_data[['distance', 'wind_speed', 'efficiency_score']])  # 필요한 열만 사용
+    predictions = model.predict(input_data[['distance', 'efficiency_score']])  # 필요한 열만 사용
     return predictions
 
 if __name__ == "__main__":
@@ -41,5 +41,5 @@ if __name__ == "__main__":
     )
 
     # 예측 실행
-    result = predict_delivery_time("models/delivery_time_prediction_model.pkl", new_data)
-    print("Predicted Delivery Time(minute): ", result)
+    result = predict_delivery_time(model_path, new_data)
+    print("Predicted Delivery Time (minutes): ", result)
