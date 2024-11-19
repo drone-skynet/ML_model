@@ -2,7 +2,7 @@ import joblib
 import math
 import pandas as pd
 
-# 학습된 모델 로드 (model_path 수정 필요)
+# 학습된 모델 로드
 def load_model(model_path):
     return joblib.load(model_path)
 
