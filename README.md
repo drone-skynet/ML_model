@@ -1,4 +1,4 @@
-# [지도학습을 통한 다중 선형 회귀 모델]
+# [Gradient Boosting Regressor 모델]
 
 ## 1. 학습 전 수집 데이터
 ① 경로 거리(km), ② 풍속(m/s), ③ 풍향(°), ④ 드론 경로 방향(°), ⑤ 배송 시간(min)
@@ -20,12 +20,12 @@ Efficiency Score = -cos(Relative Angle) x Wind Speed
 e.g. 효율 점수가 음수라면 바람이 배송 시간에 방해되는 것
 
 ## 2. 최종 학습 데이터
-X : [경로 거리, 풍속, 효율 점수]
+X : [경로 거리, 효율 점수]
 
 y : 배송 시간
 
 ## 3. 사용 라이브러리
-* <b>Scikit-learn</b> - 머신러닝
+* <b>Scikit-learn</b> - 머신러닝(Gradient Boosting Regressor 모델)
 * <b>Pandas</b> - 데이터 분석
 * <b>Joblib</b> - 병렬 처리
 
@@ -39,4 +39,8 @@ python src/data_preprocessing.py
 
 python src/train_model.py
 
-생성 결과물) models/delivery_time_prediction_model.pkl: 학습된 모델
+생성 결과물) models/delivery_time_prediction_model.pkl (학습된 모델)
+
+## (참고) 데이터 시각화
+<img src="https://github.com/user-attachments/assets/cbb50ca9-8681-473d-ad45-1220b838cb52" width="800" height="400"/>
+<img src="https://github.com/user-attachments/assets/e4ca81b5-e36a-4857-80b1-3da6bc478100" width="400" height="400"/>

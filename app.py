@@ -23,31 +23,43 @@ def calculate_efficiency_score(drone_direction, wind_direction, wind_speed):
     efficiency_score = -math.cos(relative_angle) * wind_speed
     return efficiency_score
 
+# 입력 데이터 전처리 함수
+def preprocess_input_data(data):
+    # 데이터프레임 생성
+    input_data = pd.DataFrame(data, columns=['distance', 'wind_direction', 'drone_direction', 'wind_speed'])
+
+    # 효율 점수 계산
+    input_data['efficiency_score'] = input_data.apply(
+        lambda row: calculate_efficiency_score(
+            row['drone_direction'], row['wind_direction'], row['wind_speed']
+        ),
+        axis=1
+    )
+
+    # 필요한 열만 선택
+    processed_data = input_data[['distance', 'efficiency_score']]
+    return processed_data
+
 @app.route('/predict', methods=['POST'])
 def predict():
-    try: 
+    try:
         # 클라이언트로부터 JSON 데이터 수신
         data = request.get_json()
-    
-        # 입력 데이터 생성
-        input_data = pd.DataFrame([data], columns=['distance', 'wind_speed', 'wind_direction', 'drone_direction'])
-    
-        # 효율 점수 계산 후 컬럼 추가
-        input_data['efficiency_score'] = input_data.apply(
-            lambda row: calculate_efficiency_score(
-                row['drone_direction'], row['wind_direction'], row['wind_speed']
-            ),
-            axis=1
-        )
-    
-        # 모델에 필요한 컬럼만 선택
-        model_input = input_data[['distance', 'wind_speed', 'efficiency_score']]
-    
+
+        # 다중 입력 데이터 처리
+        if not isinstance(data, list):  # 단일 데이터가 전달된 경우 리스트로 변환
+            data = [data]
+
+        # 입력 데이터 전처리
+        processed_data = preprocess_input_data(data)
+
         # 예측 수행
-        prediction = model.predict(model_input)
-    
-        # 예측 결과 반환
-        return jsonify({'predicted_delivery_time': round(prediction[0], 2)})
+        predictions = model.predict(processed_data)
+
+        # 입력 데이터와 예측 결과를 결합하여 반환
+        response = pd.DataFrame(data)
+        response['predicted_delivery_time'] = predictions
+        return jsonify(response.to_dict(orient='records'))
 
     except Exception as e:
         return jsonify({'error': str(e)}), 400

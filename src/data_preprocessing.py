@@ -6,9 +6,13 @@ import pandas as pd
 import math
 import os
 
+# 효율 점수 계산 함수
 def calculate_efficiency_score(drone_direction, wind_direction, wind_speed):
+    # 상대 각도 계산
     relative_angle = (wind_direction - drone_direction + 360) % 360
-    relative_angle = math.radians(relative_angle)
+    relative_angle = math.radians(relative_angle)  # 라디안으로 변환
+
+    # 효율 점수 계산
     efficiency_score = -math.cos(relative_angle) * wind_speed
     return efficiency_score
 
@@ -18,12 +22,17 @@ def preprocess_data(input_file, output_file):
 
     # 효율 점수 계산
     data['efficiency_score'] = data.apply(
-        lambda row: calculate_efficiency_score(row['drone_direction'], row['wind_direction'], row['wind_speed']),
+        lambda row: calculate_efficiency_score(
+            row['drone_direction'], row['wind_direction'], row['wind_speed']
+        ),
         axis=1
     )
 
+    # 필요한 열만 선택
+    processed_data = data[['distance', 'efficiency_score', 'delivery_time']]
+
     # 전처리된 데이터 저장
-    data.to_csv(output_file, index=False)
+    processed_data.to_csv(output_file, index=False)
     print(f"Processed data saved to {output_file}")
 
 if __name__ == "__main__":

@@ -1,21 +1,10 @@
 # train_model.py
 import pandas as pd
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score  # 모델 평가 라이브러리
 import joblib
-import math
 import os
-
-# 효율 점수 계산 함수
-def calculate_efficiency_score(drone_direction, wind_direction, wind_speed):
-    # 상대 각도 계산
-    relative_angle = (wind_direction - drone_direction + 360) % 360
-    relative_angle = math.radians(relative_angle)  # 라디안으로 변환
-
-    # 효율 점수 계산
-    efficiency_score = -math.cos(relative_angle) * wind_speed
-    return efficiency_score
 
 # processed_data.csv 데이터를 읽어 모델을 학습하고 평가
 # 학습된 모델을 delivery_time_prediction_model.pkl로 저장하여 flask 서버에서 사용할 수 있도록 준비
@@ -23,21 +12,20 @@ def train_model(data_file, model_file):
     # 데이터 읽기
     data = pd.read_csv(data_file)
 
-    # 효율 점수 계산
-    data['efficiency_score'] = data.apply(
-        lambda row: calculate_efficiency_score(row['drone_direction'], row['wind_direction'], row['wind_speed']),
-        axis=1
-    )
-
     # 입력 피처와 타겟 변수 설정
-    X = data[['distance', 'wind_speed', 'efficiency_score']]  # 입력 피처
+    X = data[['distance', 'efficiency_score']]  # 입력 피처
     y = data['delivery_time']  # 타겟 변수
 
     # 데이터 분할 (학습용 데이터와 테스트 데이터를 8:2 비율로 분할)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # 모델 학습
-    model = LinearRegression()
+    # Gradient Boosting Regressor 모델 학습
+    model = GradientBoostingRegressor(
+        n_estimators=50,  # 트리 개수
+        learning_rate=0.05,  # 학습률
+        max_depth=3,  # 각 트리의 최대 깊이
+        random_state=42  # 재현성을 위한 랜덤 시드
+    )
     model.fit(X_train, y_train)
 
     # 모델 평가
@@ -47,6 +35,12 @@ def train_model(data_file, model_file):
 
     print("Mean Squared Error (MSE):", round(mse, 2))
     print("R^2 Score:", round(r2, 2))
+
+    # 피처 중요도 출력
+    feature_importances = model.feature_importances_
+    print("Feature Importances:")
+    for feature, importance in zip(X.columns, feature_importances):
+        print(f"{feature}: {round(importance, 2)}")
 
     # 모델 저장
     os.makedirs(os.path.dirname(model_file), exist_ok=True)  # 모델 저장 디렉토리 생성
