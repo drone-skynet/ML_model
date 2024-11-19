@@ -45,7 +45,7 @@ def predict_delivery_time(model_file, input_data):
 if __name__ == "__main__":
     # 현재 스크립트 경로 기반으로 모델 파일 경로 설정
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_dir, "models", "delivery_time_prediction_model.pkl")
+    model_path = os.path.join(base_dir, "../models/delivery_time_prediction_model.pkl")
 
     # 새로운 데이터 예시
     new_data = pd.DataFrame(
