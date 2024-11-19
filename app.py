@@ -25,13 +25,13 @@ def calculate_efficiency_score(drone_direction, wind_direction, wind_speed):
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    try: 
+    try:
         # 클라이언트로부터 JSON 데이터 수신
         data = request.get_json()
-    
+
         # 입력 데이터 생성
-        input_data = pd.DataFrame([data], columns=['distance', 'wind_speed', 'wind_direction', 'drone_direction'])
-    
+        input_data = pd.DataFrame([data], columns=['distance', 'wind_direction', 'drone_direction', 'wind_speed'])
+
         # 효율 점수 계산 후 컬럼 추가
         input_data['efficiency_score'] = input_data.apply(
             lambda row: calculate_efficiency_score(
@@ -39,13 +39,13 @@ def predict():
             ),
             axis=1
         )
-    
+
         # 모델에 필요한 컬럼만 선택
-        model_input = input_data[['distance', 'wind_speed', 'efficiency_score']]
-    
+        model_input = input_data[['distance', 'efficiency_score']]
+
         # 예측 수행
         prediction = model.predict(model_input)
-    
+
         # 예측 결과 반환
         return jsonify({'predicted_delivery_time': round(prediction[0], 2)})
 
