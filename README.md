@@ -35,7 +35,7 @@ y : 배송 시간
 
 python src/data_preprocessing.py
 
-생성 결과물) data/processed_data.csv: 전처리된 데이터 (효율 점수 추가)
+생성 결과물) data/processed_data.csv: 전처리된 데이터 (학습 데이터)
 
 python src/train_model.py
 
