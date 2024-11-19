@@ -1,10 +1,9 @@
 # train_model.py
 import pandas as pd
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score  # 모델 평가 라이브러리
 import joblib
-import math
 import os
 
 # processed_data.csv 데이터를 읽어 모델을 학습하고 평가
@@ -20,8 +19,13 @@ def train_model(data_file, model_file):
     # 데이터 분할 (학습용 데이터와 테스트 데이터를 8:2 비율로 분할)
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # 모델 학습
-    model = LinearRegression()
+    # Gradient Boosting Regressor 모델 학습
+    model = GradientBoostingRegressor(
+        n_estimators=50,  # 트리 개수
+        learning_rate=0.05,  # 학습률
+        max_depth=3,  # 각 트리의 최대 깊이
+        random_state=42  # 재현성을 위한 랜덤 시드
+    )
     model.fit(X_train, y_train)
 
     # 모델 평가
@@ -31,6 +35,12 @@ def train_model(data_file, model_file):
 
     print("Mean Squared Error (MSE):", round(mse, 2))
     print("R^2 Score:", round(r2, 2))
+
+    # 피처 중요도 출력
+    feature_importances = model.feature_importances_
+    print("Feature Importances:")
+    for feature, importance in zip(X.columns, feature_importances):
+        print(f"{feature}: {round(importance, 2)}")
 
     # 모델 저장
     os.makedirs(os.path.dirname(model_file), exist_ok=True)  # 모델 저장 디렉토리 생성
