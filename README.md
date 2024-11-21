@@ -41,7 +41,7 @@ python src/train_model.py
 
 생성 결과물) models/delivery_time_prediction_model.pkl (학습된 모델)
 
-## (참고) 데이터 시각화
+## 5. 데이터 시각화 (R^2 = 0.87)
 
 python src/visualize_data.py
 
