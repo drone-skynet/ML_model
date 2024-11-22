@@ -1,7 +1,7 @@
 from ml_model import load_model, predict_delivery_time
 
 # 학습된 모델 로드
-model = load_model("/delivery_time_prediction_model.pkl")
+model = load_model("./delivery_time_prediction_model.pkl")
 
 # 인자 값
 path = {
