@@ -44,6 +44,5 @@ python src/train_model.py
 ## 5. 데이터 시각화 (R^2 = 0.87)
 
 python src/visualize_data.py
-
-<img src="https://github.com/user-attachments/assets/cbb50ca9-8681-473d-ad45-1220b838cb52" width="800" height="400"/>
-<img src="https://github.com/user-attachments/assets/e4ca81b5-e36a-4857-80b1-3da6bc478100" width="400" height="400"/>
+<img src="https://github.com/user-attachments/assets/29865adb-7bc4-4805-8c6c-a79cb4721787" width="800" height="400"/>
+<img src="https://github.com/user-attachments/assets/bb344a32-e892-4081-9d4d-d7a5c43143e2" width="400" height="400"/>
