@@ -10,7 +10,7 @@ Relative Angle = (Wind Direction - Drone Direction + 360) % 360
 
 180도에 가까울수록 바람이 배송 시간에 더욱 도움
 
-### (2) cos를 사용한 효율 점수 계산
+### (2) 삼각함수를 이용한 효율 점수 계산
 Relative Angle을 먼저 라디안 형식으로 바꿔준 후 아래의 공식에 대입
 
 Efficiency Score = -cos(Relative Angle) x Wind Speed
