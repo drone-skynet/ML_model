@@ -5,10 +5,10 @@ model = load_model("./delivery_time_prediction_model.pkl")
 
 # 인자 값
 path = {
-    'distance': 10.5, # db값 이용
+    'distance': 1.5765170374447863, # db값 이용
     'wind_speed': 3.5, # 기상청 API 아용
-    'wind_direction': 180, # 기상청 API 아용
-    'drone_direction': 90 # 역과 역 사이의 각도로 각색 필요
+    'wind_direction': 180.2, # 기상청 API 아용
+    'drone_direction': 90.7 # 역과 역 사이의 각도로 각색 필요
 }
 
 # 배달 시간 예측
