@@ -1,7 +1,15 @@
 # [Gradient Boosting Regressor 모델]
 
 ## 1. 학습 전 수집 데이터
-① 경로 거리(km), ② 풍속(m/s), ③ 풍향(°), ④ 드론 경로 방향(°), ⑤ 배송 시간(min)
+<b>① 경로 거리(km)</b>: 소수점 16자리
+
+<b>② 풍속(m/s)</b>: 소수점 1자리
+
+<b>③ 풍향(°)</b>: 소수점 1자리
+
+<b>④ 드론 경로 방향(°)</b>: 소수점 1자리
+
+<b>⑤ 배송 시간(min)</b>: 소수점 1자리
 
 ### (1) 풍향을 고려한 상대 각도 계산
 Relative Angle = (Wind Direction - Drone Direction + 360) % 360
@@ -41,9 +49,9 @@ python src/train_model.py
 
 생성 결과물) models/delivery_time_prediction_model.pkl (학습된 모델)
 
-## 5. 데이터 시각화 (R^2 = 0.87)
+## 5. 데이터 시각화 (MSE = 0.04 / R^2 = 0.95)
 
 python src/visualize_data.py
 
-<img src="https://github.com/user-attachments/assets/29865adb-7bc4-4805-8c6c-a79cb4721787" width="800" height="400"/>
-<img src="https://github.com/user-attachments/assets/bb344a32-e892-4081-9d4d-d7a5c43143e2" width="400" height="400"/>
+<img src="https://github.com/user-attachments/assets/3a887572-c7d3-46fb-93d0-2367d0b5643a" width="800" height="400"/>
+<img src="https://github.com/user-attachments/assets/5f43783b-a24f-49f3-ae11-c086227075a6" width="400" height="400"/>
