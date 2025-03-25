@@ -53,5 +53,6 @@ python src/train_model.py
 
 python src/visualize_data.py
 
-<img src="https://github.com/user-attachments/assets/3a887572-c7d3-46fb-93d0-2367d0b5643a" width="800" height="400"/>
-<img src="https://github.com/user-attachments/assets/5f43783b-a24f-49f3-ae11-c086227075a6" width="400" height="400"/>
+<img src="https://github.com/user-attachments/assets/3a887572-c7d3-46fb-93d0-2367d0b5643a" width="600" height="300"/>
+
+<img src="https://github.com/user-attachments/assets/5f43783b-a24f-49f3-ae11-c086227075a6" width="300" height="300"/>
